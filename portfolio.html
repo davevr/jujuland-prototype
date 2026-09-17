@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio Mode · JujuLand prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Shantell+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  /* deliberately calm: the sketchbook chrome is stripped down for reviewers */
+  body{background:#fff; background-image:none; font-family:Georgia, "Times New Roman", serif}
+  .wrap{max-width:900px}
+  .wordmark{font-family:Georgia,serif; font-size:1.15rem}
+  .back{font-family:"Shantell Sans",sans-serif}
+  h1.page{font-family:Georgia,serif; transform:none; font-size:2rem; margin:26px 0 2px}
+  .lede{color:#444; font-size:.95rem; max-width:680px; margin-bottom:8px}
+  .statement{font-size:.95rem; line-height:1.7; color:#222; max-width:680px; margin:18px 0 30px; border-left:3px solid #ccc; padding-left:16px}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:26px}
+  .p{background:none; border:none; box-shadow:none; padding:0; cursor:pointer; text-align:left}
+  .p img{width:100%; display:block; border:1px solid #ddd}
+  .p .t{font-size:.95rem; font-weight:bold; margin-top:8px; font-family:Georgia,serif}
+  .p .m{font-size:.78rem; color:#666}
+  .cv{margin-top:44px; font-size:.88rem; max-width:680px}
+  .cv h2{font-family:Georgia,serif; transform:none; font-size:1.25rem; margin:22px 0 8px}
+  .cv li{margin:4px 0 4px 20px}
+  .toolbar{display:flex; gap:10px; margin:18px 0 30px}
+  @media print{ .topbar,.toolbar,.note{display:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><a class="wordmark" href="index.html">JujuLand — Portfolio</a><a class="back" href="index.html">← back to the canvas</a></div>
+
+  <h1 class="page">Selected Works · 2025–2026</h1>
+  <p class="lede">Collection: <b>Illustration — College Applications</b> · 6 pieces · curated 17 Sep 2026</p>
+
+  <div class="toolbar">
+    <button class="btn" onclick="window.print()">🖨 print / save as PDF</button>
+    <button class="btn">🔗 copy share link</button>
+  </div>
+
+  <div class="statement">
+    My work begins with light. I draw creatures and quiet places at the edge of the ordinary — a fox made of constellations, a library at the bottom of the sea — because I want the viewer to feel that the world is one degree more magical than it looks. Each piece here includes its process: sketches, stages, and time-lapse recordings, because how a drawing comes to be matters as much as how it ends. — Juju
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="cv">
+    <h2>Artist CV (selected)</h2>
+    <ul>
+      <li>Self-directed daily practice since 2015; digital media since 2021</li>
+      <li>School art prize, 2025 · regional youth exhibition (group), 2026</li>
+      <li>12 paid commissions completed (pet portraits, character illustration), 2025–26</li>
+      <li>Time-lapse process archive: 60+ recordings</li>
+    </ul>
+    <h2>Contact</h2>
+    <p style="font-size:.88rem">via the contact form · replies within 2 days · references available</p>
+  </div>
+  <p class="note">prototype — Portfolio Mode is intentionally calm; every piece links to its full process page in the real site</p>
+</div>
+
+<script src="works.js"></script>
+<script>
+const grid = document.getElementById("grid");
+GALLERY_WORKS.forEach(w=>{
+  const el = document.createElement("div");
+  el.className = "p";
+  el.innerHTML = `<img src="${w.src}" alt="${w.title}" loading="lazy">
+    <div class="t">${w.title}</div><div class="m">${w.medium} · ${w.year} · process available</div>`;
+  grid.appendChild(el);
+});
+</script>
+</body>
+</html>

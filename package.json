@@ -1,0 +1,9 @@
+{
+  "name": "living-canvas-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Homepage prototype for the JujuLand artist portfolio — full-bleed featured slideshow with slow zoom, crossfade, drill-in, history navigation, and on-demand menu.",
+  "scripts": {
+    "dev": "node server.js"
+  }
+}

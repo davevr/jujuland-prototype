@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery · JujuLand prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Shantell+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .filters{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:24px}
+  .filters .btn.active{background:var(--ink); color:var(--paper)}
+  .masonry{columns:3 280px; column-gap:22px}
+  .piece{break-inside:avoid; margin-bottom:22px; padding:10px 10px 12px; cursor:pointer; transition:transform .18s}
+  .piece:hover{transform:rotate(-.8deg) scale(1.02)}
+  .piece img{width:100%; display:block; border-radius:8px; border:2px solid var(--ink)}
+  .piece .t{font-family:Caveat,cursive; font-size:1.4rem; font-weight:700; margin-top:8px}
+  .piece .m{font-size:.72rem; color:#6b655e}
+  .piece.hide{display:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><a class="wordmark" href="index.html">JujuLand</a><a class="back" href="index.html">← back to the canvas</a></div>
+
+  <span class="tape"></span>
+  <h1 class="page">Gallery</h1>
+  <p class="lede">The current body of work — gallery-tier pieces only. Filter by medium, theme, or year. (The older stuff lives in <a href="attic.html">the Attic</a>.)</p>
+
+  <div class="filters" id="filters">
+    <button class="btn active" data-f="all">everything</button>
+    <button class="btn" data-f="procreate">Procreate</button>
+    <button class="btn" data-f="photoshop">Photoshop</button>
+    <button class="btn" data-f="animals">animals</button>
+    <button class="btn" data-f="night">night</button>
+    <button class="btn" data-f="2026">2026</button>
+    <button class="btn" data-f="2025">2025</button>
+  </div>
+
+  <div class="masonry" id="masonry"></div>
+  <p class="note">prototype — 8 placeholder works stand in for the real catalog; filters actually work</p>
+</div>
+
+<div class="lightbox" id="lb">
+  <button class="close" id="lbClose">✕</button>
+  <div class="inner">
+    <img id="lbImg" alt="">
+    <div class="body">
+      <h3 id="lbTitle"></h3>
+      <div class="meta" id="lbMeta"></div>
+      <p id="lbStory"></p>
+      <p style="margin-top:12px"><a class="btn" href="#">⬇ Get wallpaper</a> <a class="btn" href="techniques.html">▶ Making of</a></p>
+    </div>
+  </div>
+</div>
+
+<script src="works.js"></script>
+<script>
+const WORKS = GALLERY_WORKS;
+const grid = document.getElementById("masonry");
+WORKS.forEach((w,i)=>{
+  const el = document.createElement("div");
+  el.className = "piece card";
+  el.dataset.tags = w.tags.join(" ");
+  el.innerHTML = `<img src="${w.src}" alt="${w.title}" loading="lazy">
+    <div class="t">${w.title}</div><div class="m">${w.medium} · ${w.year}</div>`;
+  el.addEventListener("click", ()=>openLb(w));
+  grid.appendChild(el);
+});
+document.getElementById("filters").addEventListener("click", e=>{
+  const b = e.target.closest("button"); if(!b) return;
+  document.querySelectorAll("#filters .btn").forEach(x=>x.classList.remove("active"));
+  b.classList.add("active");
+  const f = b.dataset.f;
+  document.querySelectorAll(".piece").forEach(p=>{
+    p.classList.toggle("hide", f!=="all" && !p.dataset.tags.includes(f));
+  });
+});
+const lb = document.getElementById("lb");
+function openLb(w){
+  document.getElementById("lbImg").src = w.src;
+  document.getElementById("lbTitle").textContent = w.title;
+  document.getElementById("lbMeta").textContent = `${w.medium} · ${w.year}`;
+  document.getElementById("lbStory").textContent = w.story;
+  lb.classList.add("open");
+}
+document.getElementById("lbClose").addEventListener("click", ()=>lb.classList.remove("open"));
+lb.addEventListener("click", e=>{ if(e.target===lb) lb.classList.remove("open"); });
+addEventListener("keydown", e=>{ if(e.key==="Escape") lb.classList.remove("open"); });
+</script>
+</body>
+</html>

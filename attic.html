@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Attic · JujuLand prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Shantell+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  body{background:#f5edda} /* attic warmth */
+  .era{position:relative; margin:44px 0 10px; padding-left:34px; border-left:3px dashed rgba(46,42,38,.4)}
+  .era::before{
+    content:""; position:absolute; left:-11px; top:8px; width:16px; height:16px;
+    background:var(--era,#ef9438); border:2.5px solid var(--ink); border-radius:50% 45% 55% 48%;
+  }
+  .era h2{margin-top:0}
+  .era .note2{font-size:.88rem; color:#5b5347; max-width:560px; margin-bottom:18px; font-style:italic}
+  .row{display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:20px}
+  .attic-piece{cursor:pointer; transition:transform .18s; padding:10px 10px 12px}
+  .attic-piece:hover{transform:rotate(.8deg) scale(1.02)}
+  .attic-piece img{width:100%; display:block; border-radius:8px; border:2px solid var(--ink)}
+  .attic-piece .t{font-family:Caveat,cursive; font-size:1.3rem; font-weight:700; margin-top:6px}
+  .attic-piece .m{font-size:.7rem; color:#6b655e}
+  .down{text-align:center; font-size:1.6rem; opacity:.5; margin:18px 0}
+  .sign{
+    display:inline-block; font-family:Caveat,cursive; font-size:1.3rem; margin-top:8px;
+    transform:rotate(-2deg); color:#6b5b3e;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><a class="wordmark" href="index.html">JujuLand</a><a class="back" href="index.html">← back to the canvas</a></div>
+
+  <span class="tape"></span>
+  <h1 class="page">The Attic</h1>
+  <p class="lede">Everything that came before. Scroll down to travel back in time — the deeper you go, the younger the artist. Dusty, beloved, and absolutely not deleted.</p>
+
+  <div id="eras"></div>
+
+  <div class="down">⛏ bottom of the stairs ⛏</div>
+  <span class="sign">— more boxes to unpack: the backlog import continues —</span>
+  <p class="note">prototype — 3 eras shown; the real archive groups hundreds of works by year &amp; age with anecdotes per era</p>
+</div>
+
+<div class="lightbox" id="lb">
+  <button class="close" id="lbClose">✕</button>
+  <div class="inner">
+    <img id="lbImg" alt="">
+    <div class="body">
+      <h3 id="lbTitle"></h3>
+      <div class="meta" id="lbMeta"></div>
+      <p id="lbStory"></p>
+    </div>
+  </div>
+</div>
+
+<script src="works.js"></script>
+<script>
+const colors = ["#ef9438","#3d7de4","#e4573d"];
+const host = document.getElementById("eras");
+ARCHIVE_ERAS.forEach((era,ei)=>{
+  const sec = document.createElement("section");
+  sec.className = "era"; sec.style.setProperty("--era", colors[ei % colors.length]);
+  sec.innerHTML = `<h2>${era.label}</h2><p class="note2">"${era.note}"</p><div class="row"></div>`;
+  const row = sec.querySelector(".row");
+  era.works.forEach(w=>{
+    const el = document.createElement("div");
+    el.className = "attic-piece card";
+    el.innerHTML = `<img src="${w.src}" alt="${w.title}" loading="lazy">
+      <div class="t">${w.title}</div><div class="m">${w.medium} · ${w.year}</div>`;
+    el.addEventListener("click", ()=>{
+      document.getElementById("lbImg").src = w.src;
+      document.getElementById("lbTitle").textContent = w.title;
+      document.getElementById("lbMeta").textContent = `${w.medium} · ${w.year}`;
+      document.getElementById("lbStory").textContent = w.story;
+      document.getElementById("lb").classList.add("open");
+    });
+    row.appendChild(el);
+  });
+  host.appendChild(sec);
+});
+const lb = document.getElementById("lb");
+document.getElementById("lbClose").addEventListener("click", ()=>lb.classList.remove("open"));
+lb.addEventListener("click", e=>{ if(e.target===lb) lb.classList.remove("open"); });
+addEventListener("keydown", e=>{ if(e.key==="Escape") lb.classList.remove("open"); });
+</script>
+</body>
+</html>

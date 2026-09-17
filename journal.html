@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Journal · JujuLand prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Shantell+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .entry{display:grid; grid-template-columns:110px 1fr; gap:18px; margin-bottom:22px; padding:18px 20px}
+  @media(max-width:600px){.entry{grid-template-columns:1fr}}
+  .date{font-family:Caveat,cursive; font-size:1.25rem; font-weight:700; color:var(--red); transform:rotate(-1deg)}
+  .entry h3{font-family:Caveat,cursive; font-size:1.6rem; margin-bottom:4px}
+  .entry p{font-size:.88rem}
+  .entry img{width:150px; border-radius:8px; border:2px solid var(--ink); float:right; margin:0 0 8px 14px}
+  .sub{margin:26px 0; display:flex; gap:10px; align-items:center; flex-wrap:wrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><a class="wordmark" href="index.html">JujuLand</a><a class="back" href="index.html">← back to the canvas</a></div>
+
+  <span class="tape"></span>
+  <h1 class="page">Journal</h1>
+  <p class="lede">What's on the desk, what's in the head. Small updates for family, friends, and the curious.</p>
+
+  <div class="sub card">
+    <b>Never miss a piece:</b>
+    <span style="font-size:.85rem">new works &amp; monthly letter, no spam ever</span>
+    <input placeholder="your@email" style="font:inherit; font-size:.85rem; padding:7px 14px; border:2px solid var(--ink); border-radius:999px; background:#fff">
+    <button class="btn primary">subscribe</button>
+  </div>
+
+  <div class="entry card">
+    <div class="date">Sep 14<br>2026</div>
+    <div><h3>Starlight Fox is done ✳︎</h3>
+    <img src="art/starlight-fox.jpg" alt="Starlight Fox thumbnail">
+    <p>Finished after three evenings. The meteor shower was two weeks ago and I couldn't stop thinking about what a fox would look like if it was made of sky. Wallpaper pack is in the <a href="wallpapers.html">Studio</a>, and the time-lapse is up on the <a href="techniques.html">Techniques</a> page.</p></div>
+  </div>
+
+  <div class="entry card">
+    <div class="date">Sep 2<br>2026</div>
+    <div><h3>Supporters saw it first</h3>
+    <p><b>Moon Garden</b> was supporters-only for a week (thank you, you know who you are 💛) and it's now public in the gallery. Next early release: something with an octopus. That's all I'm saying.</p></div>
+  </div>
+
+  <div class="entry card">
+    <div class="date">Aug 18<br>2026</div>
+    <div><h3>Commissions: 2 slots open</h3>
+    <p>Pet portraits and "your OC in my style" slots are open for September. Terms and the queue are on the <a href="support.html">Support</a> page.</p></div>
+  </div>
+
+  <div class="entry card">
+    <div class="date">Aug 3<br>2026</div>
+    <div><h3>Found a box of crayon dragons</h3>
+    <p>Mum found a folder of my old drawings in the actual attic, so I scanned the best ones into <a href="attic.html">the Attic</a> (the website one). Age 7 me had strong opinions about dragons.</p></div>
+  </div>
+  <p class="note">prototype — entries are fiction; the real journal has an RSS feed</p>
+</div>
+</body>
+</html>

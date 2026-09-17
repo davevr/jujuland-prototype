@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support · JujuLand prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Shantell+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .grid3{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:22px}
+  .tier{text-align:center; padding:24px 18px}
+  .tier .price{font-family:Caveat,cursive; font-size:2.2rem; font-weight:700; color:var(--accent)}
+  .tier h3{font-family:Caveat,cursive; font-size:1.7rem}
+  .tier ul{list-style:none; font-size:.82rem; margin:12px 0 16px}
+  .tier li{padding:3px 0}
+  .tier.pop{outline:3px dashed var(--orange); outline-offset:5px}
+  .tipjar{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:14px}
+  .status{display:inline-block; padding:5px 16px; border-radius:999px; border:2px solid var(--ink);
+          background:#cdeac0; font-size:.8rem; font-weight:600; transform:rotate(-1deg)}
+  .comm{margin-top:30px; display:grid; grid-template-columns:1fr 1fr; gap:22px}
+  @media(max-width:760px){.comm{grid-template-columns:1fr}}
+  .menu li{margin:6px 0 6px 20px; font-size:.88rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><a class="wordmark" href="index.html">JujuLand</a><a class="back" href="index.html">← back to the canvas</a></div>
+
+  <span class="tape"></span>
+  <h1 class="page">Support &amp; Commissions</h1>
+  <p class="lede">Everything here runs through Ko-fi — safe, low fees, parent-administered. The site never takes your card details itself.</p>
+
+  <h2>Buy me a (hot) chocolate ☕</h2>
+  <div class="tipjar card">
+    <span style="font-size:.85rem">One-off, no account needed:</span>
+    <button class="btn">$3</button><button class="btn">$5</button><button class="btn">$10</button>
+    <button class="btn primary">open Ko-fi →</button>
+  </div>
+
+  <h2>Join the circle</h2>
+  <div class="grid3">
+    <div class="tier card" style="--accent:var(--teal)">
+      <h3>Wallpaper Club</h3><div class="price">$3/mo</div>
+      <ul><li>all 🔒 wallpaper packs</li><li>monthly exclusive wallpaper</li><li>name in the credits page</li></ul>
+      <button class="btn">join on Ko-fi →</button>
+    </div>
+    <div class="tier card pop" style="--accent:var(--orange)">
+      <h3>Sketchbook Circle</h3><div class="price">$6/mo</div>
+      <ul><li>everything above</li><li>early releases (1 week ahead)</li><li>WIP sketches &amp; abandoned drafts</li></ul>
+      <button class="btn primary">join on Ko-fi →</button>
+    </div>
+    <div class="tier card" style="--accent:var(--purple)">
+      <h3>Studio Friend</h3><div class="price">$12/mo</div>
+      <ul><li>everything above</li><li>full-length time-lapses</li><li>vote on what I draw next</li><li>commission priority queue</li></ul>
+      <button class="btn">join on Ko-fi →</button>
+    </div>
+  </div>
+
+  <span class="tape"></span>
+  <h2>Commissions <span class="status">● 2 slots open for September</span></h2>
+  <div class="comm">
+    <div class="card">
+      <h3 style="font-family:Caveat,cursive; font-size:1.5rem">Menu</h3>
+      <ul class="menu">
+        <li><b>Pet portrait</b> — $40 · one beloved creature, full scene</li>
+        <li><b>Your OC in my style</b> — $60 · character + simple background</li>
+        <li><b>Phone wallpaper commission</b> — $75 · made to your device's exact size</li>
+        <li><b>Full illustration</b> — from $120 · let's talk first</li>
+      </ul>
+      <p style="margin-top:14px"><button class="btn primary">request via Ko-fi Commissions →</button></p>
+    </div>
+    <div class="card">
+      <h3 style="font-family:Caveat,cursive; font-size:1.5rem">How it works</h3>
+      <ul class="menu">
+        <li>Payment upfront through Ko-fi; I confirm within 2 days</li>
+        <li>You get a sketch checkpoint before I render — changes are easy there</li>
+        <li>Finished piece in wallpaper sizes + the time-lapse, just for you</li>
+        <li>Personal use; commercial use = tell me and we'll sort a license</li>
+      </ul>
+      <p style="margin-top:10px; font-size:.8rem; color:#6b655e">Recent examples: <i>Dragon Friend</i> and <i>Clockwork Bird</i> were commissions.</p>
+    </div>
+  </div>
+  <p class="note">prototype — buttons link out to Ko-fi in the real site; nothing is processed here</p>
+</div>
+</body>
+</html>

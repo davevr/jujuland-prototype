@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Techniques · JujuLand prototype</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Shantell+Sans:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+<style>
+  .stages{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:18px}
+  .stage{padding:10px 10px 12px}
+  .stage img{width:100%; display:block; border-radius:8px; border:2px solid var(--ink)}
+  .stage .s{font-family:Caveat,cursive; font-size:1.25rem; font-weight:700; margin-top:8px}
+  .stage .d{font-size:.75rem; color:#6b655e}
+  /* fake process stages via filters — real site uses real WIP exports */
+  .f-sketch{filter:grayscale(1) contrast(1.5) brightness(1.25) opacity(.85)}
+  .f-lines{filter:grayscale(.8) contrast(1.25) brightness(1.1)}
+  .f-flat{filter:saturate(.55) contrast(1.05) brightness(1.08)}
+  .arrow{text-align:center; font-size:1.4rem; opacity:.4; align-self:center}
+  .timelapse{
+    margin-top:34px; display:grid; grid-template-columns:minmax(260px,460px) 1fr; gap:26px; align-items:center;
+  }
+  @media(max-width:760px){.timelapse{grid-template-columns:1fr}}
+  .screen{position:relative; border:3px solid var(--ink); border-radius:14px; overflow:hidden; box-shadow:5px 6px 0 rgba(46,42,38,.9)}
+  .screen img{width:100%; display:block; animation:tl 12s linear infinite alternate}
+  @keyframes tl{from{filter:grayscale(1) brightness(1.2)} to{filter:none}}
+  .play{
+    position:absolute; inset:0; display:grid; place-items:center; font-size:3rem; color:#fff;
+    background:rgba(0,0,0,.25); text-shadow:0 2px 12px rgba(0,0,0,.6);
+  }
+  .tools{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+  .brushes{columns:2 240px; gap:14px; margin-top:10px; font-size:.85rem}
+  .brushes li{margin:0 0 8px 18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="topbar"><a class="wordmark" href="index.html">JujuLand</a><a class="back" href="index.html">← back to the canvas</a></div>
+
+  <span class="tape"></span>
+  <h1 class="page">Techniques</h1>
+  <p class="lede">How the sausage — er, the fox — gets made. Every featured piece carries its own "Making of": stages, time-lapse, and the actual brushes used.</p>
+
+  <h2>Making of · Starlight Fox</h2>
+  <div class="stages">
+    <div class="stage card"><img class="f-sketch" src="art/starlight-fox.jpg" alt="sketch stage"><div class="s">1 · Sketch</div><div class="d">loose gesture, 10 min, 6B pencil brush</div></div>
+    <div class="stage card"><img class="f-lines" src="art/starlight-fox.jpg" alt="line stage"><div class="s">2 · Lines &amp; shapes</div><div class="d">big shapes first; the hill comes before the fox</div></div>
+    <div class="stage card"><img class="f-flat" src="art/starlight-fox.jpg" alt="flat colors stage"><div class="s">3 · Flat colors</div><div class="d">palette locked: indigo, bone white, one warm gold</div></div>
+    <div class="stage card"><img src="art/starlight-fox.jpg" alt="final"><div class="s">4 · Light &amp; final</div><div class="d">stars painted one by one; glow layer on soft-light</div></div>
+  </div>
+
+  <div class="timelapse">
+    <div class="screen"><img src="art/starlight-fox.jpg" alt="time-lapse frame"><div class="play">▶</div></div>
+    <div>
+      <h2 style="margin-top:0">Time-lapse</h2>
+      <p style="font-size:.9rem">Every Procreate piece records its own time-lapse automatically. Short loops play right here on the page; full-length versions (this one is 4 min 12 s) live on the unlisted YouTube channel, linked from the artwork page.</p>
+      <div class="tools">
+        <span class="tags"><em>Procreate</em><em>iPad Air</em><em>6B pencil brush</em><em>soft-light glow</em><em>~3h total</em></span>
+      </div>
+    </div>
+  </div>
+
+  <span class="tape"></span>
+  <h2>Favorite brushes &amp; habits</h2>
+  <ul class="brushes">
+    <li><b>Dry ink</b> for lines — it forgives wobble beautifully</li>
+    <li><b>6B pencil</b> for every sketch, always, forever</li>
+    <li>Glow = duplicate layer → gaussian blur → soft light, not the bloom tool</li>
+    <li>Palette rule: 3 colors + 1 accent. Break it only for good reasons</li>
+    <li>Flip the canvas horizontally every 20 minutes to catch wonky anatomy</li>
+    <li>Time-lapse on, always — future-me loves watching them</li>
+  </ul>
+  <p class="note">prototype — stage images are simulated with filters; the real page uses actual WIP exports + embedded time-lapse video</p>
+</div>
+</body>
+</html>

@@ -1,0 +1,65 @@
+/* JujuLand prototype — shared sketchbook chrome for inner pages */
+:root{
+  --paper:#fbf6ec; --ink:#2e2a26; --red:#e4573d; --blue:#3d7de4; --green:#4a9e6b;
+  --purple:#8a5fb8; --orange:#ef9438; --pink:#e87ca1; --teal:#2fa39a;
+}
+*{box-sizing:border-box; margin:0; padding:0}
+body{
+  font-family:"Shantell Sans", system-ui, sans-serif;
+  background:var(--paper); color:var(--ink);
+  background-image:radial-gradient(rgba(46,42,38,.055) 1px, transparent 1px);
+  background-size:22px 22px; line-height:1.55;
+}
+.wrap{max-width:1060px; margin:0 auto; padding:0 20px 90px}
+
+.topbar{display:flex; justify-content:space-between; align-items:center; padding:20px 4px 0}
+.wordmark{font-family:Caveat,cursive; font-size:1.8rem; font-weight:700; text-decoration:none; color:var(--ink)}
+.back{
+  font-size:.82rem; font-weight:600; text-decoration:none; color:var(--ink);
+  border:2px solid var(--ink); border-radius:999px; padding:5px 15px; background:#fff;
+  box-shadow:2px 2px 0 var(--ink); transition:transform .15s, background .15s;
+}
+.back:hover{background:var(--orange); transform:rotate(-1.5deg)}
+
+h1.page{
+  font-family:Caveat,cursive; font-size:clamp(2.6rem,6vw,4rem); font-weight:700;
+  margin:34px 0 4px; transform:rotate(-.8deg);
+}
+.lede{color:#55504a; max-width:640px; margin-bottom:30px}
+.tape{
+  width:110px; height:26px; background:rgba(239,148,56,.5); display:block;
+  transform:rotate(-3deg); margin:34px 0 -12px -16px; position:relative; z-index:1;
+  border-left:2px dashed rgba(255,255,255,.6); border-right:2px dashed rgba(255,255,255,.6);
+}
+h2{font-family:Caveat,cursive; font-size:2rem; margin:26px 0 12px; transform:rotate(-.5deg)}
+
+.card{
+  background:#fff; border:2.5px solid var(--ink); border-radius:14px 18px 12px 20px/20px 12px 18px 14px;
+  padding:20px; box-shadow:4px 5px 0 rgba(46,42,38,.9);
+}
+.btn{
+  display:inline-block; border:2px solid var(--ink); border-radius:999px; padding:7px 18px;
+  font:inherit; font-size:.85rem; font-weight:600; background:#fff; color:var(--ink);
+  cursor:pointer; box-shadow:2px 2px 0 var(--ink); text-decoration:none; transition:transform .12s, background .15s;
+}
+.btn:hover{background:var(--orange); transform:translate(-1px,-1px)}
+.btn.primary{background:var(--ink); color:var(--paper)}
+.btn.primary:hover{background:var(--red)}
+.tags{display:flex; gap:6px; flex-wrap:wrap}
+.tags em{font-style:normal; font-size:.7rem; border:1.5px solid var(--ink); border-radius:999px; padding:2px 10px; background:var(--paper)}
+
+/* lightbox shared by gallery & attic */
+.lightbox{
+  position:fixed; inset:0; z-index:60; display:grid; place-items:center;
+  background:rgba(13,11,9,.88); opacity:0; pointer-events:none; transition:opacity .35s ease;
+}
+.lightbox.open{opacity:1; pointer-events:auto}
+.lightbox .inner{max-width:min(760px,92vw); max-height:90vh; overflow:auto; background:var(--paper); border-radius:16px; padding-bottom:20px}
+.lightbox img{width:100%; display:block; border-radius:16px 16px 0 0}
+.lightbox .body{padding:16px 24px 0}
+.lightbox h3{font-family:Caveat,cursive; font-size:2rem}
+.lightbox .meta{font-size:.8rem; color:#6b655e; margin-bottom:8px}
+.lightbox p{font-size:.9rem}
+.lightbox .close{position:absolute; top:14px; right:18px; font-size:1.5rem; background:none; border:none; color:#fbf6ec; cursor:pointer}
+
+.note{font-size:.78rem; color:#6b655e; margin-top:36px; text-align:center}
