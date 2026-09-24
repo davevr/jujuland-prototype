@@ -31,11 +31,13 @@
   }
   /* Continuous drift: the zoom begins the first time a slide is shown and NEVER
      stops or resets — the crossfade just swaps opacity between two images that
-     both keep drifting, so there is no snap-back and no static fade-in. */
-  .slide.seen img{animation:kenburns 180s ease-in-out infinite alternate}
+     both keep drifting, so there is no snap-back and no static fade-in.
+     Linear timing = constant, perceptible speed (~0.4% zoom per second,
+     roughly 8-9% over a 20s viewing); 'alternate' reverses it smoothly. */
+  .slide.seen img{animation:kenburns 80s linear infinite alternate}
   @keyframes kenburns{
-    from{transform:scale(1.03) translate(calc(var(--tx,1.5%) * -1), calc(var(--ty,-1.5%) * -1))}
-    to  {transform:scale(1.22) translate(var(--tx,1.5%), var(--ty,-1.5%))}
+    from{transform:scale(1.05) translate(calc(var(--tx,1.5%) * -1), calc(var(--ty,-1.5%) * -1))}
+    to  {transform:scale(1.38) translate(var(--tx,1.5%), var(--ty,-1.5%))}
   }
   /* gentle vignette so chrome stays readable without touching the art */
   .vignette{position:absolute; inset:0; pointer-events:none;
