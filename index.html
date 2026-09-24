@@ -29,11 +29,13 @@
     width:100%; height:100%; object-fit:cover; object-position:center;
     transform-origin:var(--ox,50%) var(--oy,50%);
   }
-  /* Ken Burns drift — runs for the full display duration */
-  .slide.active img{animation:kenburns calc(var(--slide-ms) + var(--fade-ms)) linear forwards}
+  /* Continuous drift: the zoom begins the first time a slide is shown and NEVER
+     stops or resets — the crossfade just swaps opacity between two images that
+     both keep drifting, so there is no snap-back and no static fade-in. */
+  .slide.seen img{animation:kenburns 180s ease-in-out infinite alternate}
   @keyframes kenburns{
-    from{transform:scale(1.0) translate(0,0)}
-    to  {transform:scale(1.12) translate(var(--tx,1.5%), var(--ty,-1.5%))}
+    from{transform:scale(1.03) translate(calc(var(--tx,1.5%) * -1), calc(var(--ty,-1.5%) * -1))}
+    to  {transform:scale(1.22) translate(var(--tx,1.5%), var(--ty,-1.5%))}
   }
   /* gentle vignette so chrome stays readable without touching the art */
   .vignette{position:absolute; inset:0; pointer-events:none;
@@ -138,7 +140,7 @@
   /* ---------- reduced motion: static crossfade-free gallery ---------- */
   @media (prefers-reduced-motion: reduce){
     .slide{transition:none}
-    .slide.active img{animation:none}
+    .slide img{animation:none}
     body.idle .chrome{opacity:1} body.idle{cursor:auto}
   }
 </style>
@@ -260,8 +262,7 @@ function show(idx, {push=true} = {}){
   img.style.setProperty("--tx", w.tx); img.style.setProperty("--ty", w.ty);
 
   slides.forEach(s=>s.classList.remove("active"));
-  // restart the Ken Burns animation
-  void slide.offsetWidth;
+  slide.classList.add("seen");   // starts the continuous drift the first time only — never restarts
   slide.classList.add("active");
 
   capTitle.textContent = w.title;
