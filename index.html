@@ -96,9 +96,10 @@
   .nav{
     position:fixed; inset:0; z-index:40; display:grid; place-items:center;
     background:rgba(13,11,9,.82); backdrop-filter:blur(10px);
-    opacity:0; pointer-events:none; transition:opacity .45s ease;
+    transform:translateY(100%); opacity:0; pointer-events:none;
+    transition:transform .65s cubic-bezier(.22,1,.36,1), opacity .45s ease;
   }
-  .nav.open{opacity:1; pointer-events:auto}
+  .nav.open{transform:translateY(0); opacity:1; pointer-events:auto}
   .nav ul{list-style:none; text-align:center}
   .nav a{
     display:block; font-family:Caveat,cursive; font-weight:700;
@@ -148,7 +149,7 @@
 <div class="vignette"></div>
 
 <div class="wordmark chrome">JujuLand</div>
-<div class="hint chrome" id="hint">click the art to step inside · ✳︎ for the menu</div>
+<div class="hint chrome" id="hint">click the art to step inside · scroll down for the menu</div>
 
 <div class="caption chrome" id="caption" role="button" tabindex="0" aria-label="Open this artwork">
   <div class="t" id="capTitle"></div>
@@ -327,17 +328,35 @@ detail.addEventListener("click", e=>{ if(e.target === detail) closeDetail(); });
 
 /* ================= navigation overlay ================= */
 const nav = document.getElementById("nav");
-document.getElementById("navOpen").addEventListener("click", e=>{
-  e.stopPropagation(); nav.classList.add("open"); nav.setAttribute("aria-hidden","false");
-});
-document.getElementById("navClose").addEventListener("click", ()=>{
-  nav.classList.remove("open"); nav.setAttribute("aria-hidden","true");
-});
-nav.addEventListener("click", e=>{ if(e.target === nav) nav.classList.remove("open"); });
+function openNav(){ nav.classList.add("open"); nav.setAttribute("aria-hidden","false"); }
+function closeNav(){ nav.classList.remove("open"); nav.setAttribute("aria-hidden","true"); }
+document.getElementById("navOpen").addEventListener("click", e=>{ e.stopPropagation(); openNav(); });
+document.getElementById("navClose").addEventListener("click", closeNav);
+nav.addEventListener("click", e=>{ if(e.target === nav) closeNav(); });
+
+/* scroll down = the menu slides up over the canvas; scroll up = it slides away */
+let navLock = false;
+function navLockBrief(){ navLock = true; setTimeout(()=>navLock = false, 750); }
+addEventListener("wheel", e=>{
+  if(navLock || detail.classList.contains("open")) return;
+  if(e.deltaY > 20 && !nav.classList.contains("open")){ openNav(); navLockBrief(); }
+  else if(e.deltaY < -20 && nav.classList.contains("open")){ closeNav(); navLockBrief(); }
+}, {passive:true});
+let touchY = null;
+addEventListener("touchstart", e=>{ touchY = e.touches[0].clientY; }, {passive:true});
+addEventListener("touchmove", e=>{
+  if(touchY === null || navLock || detail.classList.contains("open")) return;
+  const dy = touchY - e.touches[0].clientY;   // positive = swipe up = "scroll down"
+  if(dy > 40 && !nav.classList.contains("open")){ openNav(); navLockBrief(); }
+  else if(dy < -40 && nav.classList.contains("open")){ closeNav(); navLockBrief(); }
+}, {passive:true});
+addEventListener("touchend", ()=>{ touchY = null; }, {passive:true});
 
 /* ================= keyboard ================= */
 addEventListener("keydown", e=>{
-  if(e.key === "Escape"){ closeDetail(); nav.classList.remove("open"); }
+  if(e.key === "Escape"){ closeDetail(); closeNav(); }
+  if(e.key === "ArrowDown" && !detail.classList.contains("open")) openNav();
+  if(e.key === "ArrowUp") closeNav();
   if(nav.classList.contains("open") || detail.classList.contains("open")) return;
   if(e.key === "ArrowRight") advance();
   if(e.key === "ArrowLeft") back();
